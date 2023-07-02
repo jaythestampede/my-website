@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 
 const ProfileSchema = new mongoose.Schema({
     user: {
-        type: mongoose.Schema.Types.Objectid,
+        type: mongoose.Schema.Types.ObjectId,
         ref: 'user'
     },
     company: {
@@ -90,19 +90,25 @@ const ProfileSchema = new mongoose.Schema({
     ],
     social: {
         youtube:{
-            type: string
+            type: String
         },
         twitter:{
-            type: string
+            type: String
         },
         facebook:{
-            type: string
+            type: String
         },
         linkedin:{
-            type: string
+            type: String
         },
         instagram:{
-            type: string
+            type: String
         },
+    },
+    date: {
+        type: Date,
+        default: Date.now
     }
 });
+
+module.exports = Profile = mongoose.model('profile,', ProfileSchema);
