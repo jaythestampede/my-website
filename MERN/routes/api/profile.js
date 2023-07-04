@@ -30,7 +30,7 @@ router.get('/me', auth, async (req, res) => {
 });
 
 // @route       POST api/profiles
-// @desc        Create or update usser profile
+// @desc        Create or update user profile
 // @access      Private
 
 router.post(
@@ -118,8 +118,8 @@ router.post(
     
 );
 
-// @route       GET api/profiles
-// @desc        Create or update usser profile
+// @route       GET api/profile
+// @desc        Get all profiles
 // @access      Public
 router.get('/', async (req, res) => {
     try {
@@ -131,7 +131,7 @@ router.get('/', async (req, res) => {
     }
 });
 
-// @route       GET api/profiles/user/:user_id
+// @route       GET api/profile/user/:user_id
 // @desc        Get profile by user ID
 // @access      Public
 router.get('/user/:user_id', async (req, res) => {
@@ -148,6 +148,25 @@ router.get('/user/:user_id', async (req, res) => {
         if(err.kind == 'ObjectId') {
             return res.status(400).json({ msg: 'Profile not found'});
         }
+        res.status(500).send('Server Error');
+    }
+});
+
+// @route       DELETE api/profile
+// @desc        Delete Profile, user & posts
+// @access      Private
+router.delete('/', auth, async (req, res) => {
+    try {
+        // @todo - remove users posts
+
+        // Remove profile
+        await Profile.findOneAndRemove({ user: req.user.id });
+        // Remove user
+        await User.findOneAndRemove({ _id: req.user.id });
+
+        res.json({msg: 'User deleted' });
+    } catch (err) {
+        console.error(err.message);
         res.status(500).send('Server Error');
     }
 });
