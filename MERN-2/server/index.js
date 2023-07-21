@@ -7,6 +7,7 @@ import multer from "multer";
 import morgan from "morgan";
 import helmet from "helmet";
 import path from "path";
+import authRoutes from "./routes/auth.js";
 import { fileURLToPath } from "url";
 import { register } from "./controllers/auth.js";
 
