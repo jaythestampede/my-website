@@ -23,13 +23,13 @@ const postSchema = mongoose.Schema(
             of: Boolean,
         },
         comments: {
-            types: Array,
+            type: Array,
             default: [],
         },
     },
     { timestamps: true }
 );
 
-const Post = mongooss.model("Post", postSchema);
+const Post = mongoose.model("Post", postSchema);
 
 export default Post;
